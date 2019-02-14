@@ -28,36 +28,72 @@ let quotes = [
 		quote:
 			'When one door closes, another opens; but we often look so long and so regretfully upon the closed door that we do not see the one that has opened for us.',
 		source: ' Alexander Graham Bell'
+	},
+	{
+		quote: "I know who I am. I'm the dude playing a dude disguised as another dude!",
+		source: 'Robert Downey Jr',
+		citation: 'Tropic Thunder'
+	},
+	{
+		quote:
+			"It's the sense of touch. In any real city, you walk, you know? You brush past people, people bump into you. In L.A., nobody touches you. We're always behind this metal and glass. I think we miss that touch so much, that we crash into each other, just so we can feel something.",
+		source: 'Matt Dillon',
+		citation: 'Crash'
+	},
+	{
+		quote:
+			'The whole problem with the world is that fools and fanatics are always so certain of themselves, and wiser people so full of doubts.',
+		source: 'Bertrand Russell',
+		year: 1970
+	},
+	{
+		quote: 'You can avoid reality, but you cannot avoid the consequences of avoiding reality.',
+		source: 'Ayn Rand',
+		year: 1982
+	},
+	{
+		quote: "Only two things are infinite, the universe and human stupidity, and I'm not sure about the former.",
+		source: 'Albert Einstein',
+		year: 1920
 	}
 ];
+//an arry with quotes objects that was already printed
+let printedQuote = [];
+//holds a RGB value
+let color = function randomColor() {
+	var red = Math.floor(Math.random() * 255);
+	var green = Math.floor(Math.random() * 255);
+	var blue = Math.floor(Math.random() * 255);
+	return 'rgb(' + red + ',' + green + ',' + blue + ')';
+};
 
-/*
-generating a random number
-(num)holds a number between 0 and leangth of array
-(quote)holds one object properties from quotes array
-*/
+//function generating a random number
 function getRandomQuote(gen) {
 	var num = Math.floor(Math.random() * gen.length);
+	//holds one object properties from quotes array that was picked by index of (num)
 	var quote = gen[num];
+	//removes the quote from quotes array to prevent it from generating the same random quote
+	printedQuote.push(gen.splice(num, 1)[0]);
+	if (gen.length === 1) {
+		//checks if quotes array is empty so it can start removing from printed array then pushing it back to its origenal variable
+		var addToArray = printedQuote.splice(0, printedQuote.length);
+		for (var i = 0; i < addToArray.length; i++) {
+			gen.push(addToArray[i]);
+		}
+	}
 	return quote;
 }
 
-/***
-   - use the properties of the quote object stored in the variable to 
-     create your HTML string.
-   - set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-/*
-function prints out to HTML,
-(quote)calls getRandomQuote function,
-(print)holds strings from quote properties
-(if)used hasOwnPropety to check if propety exist in object-----found out by sreching google then link to MDN
-*/
+//function prints out to HTML,
 function printQuote() {
+	//calls getRandomQuote function
 	var quote = getRandomQuote(quotes);
+	//printes out to a specific element in HTML
 	var outputDiv = document.getElementById('quote-box');
+	//holds strings from quote properties
 	var print = '<p class="quote">' + quote.quote + '</P>';
 	print += '<p class="source">' + quote.source;
+	//used hasOwnPropety to check if propety exist in object---https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
 	if (quote.hasOwnProperty('citation')) {
 		print += '<span class="citation">' + quote.citation + '</span>';
 	}
@@ -66,7 +102,10 @@ function printQuote() {
 	}
 	print += '</p>';
 	outputDiv.innerHTML = print;
+	//changes the back ground color with a RGB value---https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp
+	document.body.style.backgroundColor = color();
 }
+setInterval(printQuote, 15000); //---https://sarfraznawaz.wordpress.com/2012/01/26/javascript-self-invoking-functions/
 
 //the event listener will call, or "invoke", the `printQuote` function.
 document.getElementById('loadQuote').addEventListener('click', printQuote, false);
