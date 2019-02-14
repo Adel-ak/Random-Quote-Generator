@@ -7,6 +7,7 @@ let quotes = [
 			"We will be perfect in every aspect of the game. You drop a pass, you run a mile. You miss a blocking assignment, you run a mile. You fumble the football, and I will break my foot off in your John Brown hind parts and then you will run a mile. Perfection! Let's go to work.",
 		source: 'Denzel Washington',
 		citation: 'Remember the Titans',
+		category: "Movie's",
 		year: 2000
 	},
 	{
@@ -15,14 +16,15 @@ let quotes = [
 		source: 'Amelia Earhart'
 	},
 	{
-		quote:
-			'I’m selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can’t handle me at my worst, then you sure as hell don’t deserve me at my best.',
-		source: 'Marilyn Monroe'
+		quote: 'Revenge is an act of passion; vengeance of justice. Injuries are revenged; crimes are avenged.',
+		source: 'Dr Samuel Johnson',
+		category: 'Revenge'
 	},
 	{
 		quote:
-			'he first step toward success is taken when you refuse to be a captive of the environment in which you first find yourself.',
-		source: 'Mark Caine'
+			'I have done my fiddling so long under Vesuvius that I have almost forgotten to play, and can only wait for the eruption and think it long of coming. Literally no man has more wholly outlived life than I. And still it?s good fun.',
+		source: 'Robert Louis Stevenson',
+		category: 'Fun'
 	},
 	{
 		quote:
@@ -32,13 +34,15 @@ let quotes = [
 	{
 		quote: "I know who I am. I'm the dude playing a dude disguised as another dude!",
 		source: 'Robert Downey Jr',
-		citation: 'Tropic Thunder'
+		citation: 'Tropic Thunder',
+		category: "Movie's"
 	},
 	{
 		quote:
 			"It's the sense of touch. In any real city, you walk, you know? You brush past people, people bump into you. In L.A., nobody touches you. We're always behind this metal and glass. I think we miss that touch so much, that we crash into each other, just so we can feel something.",
 		source: 'Matt Dillon',
-		citation: 'Crash'
+		citation: 'Crash',
+		category: "Movie's"
 	},
 	{
 		quote:
@@ -54,6 +58,7 @@ let quotes = [
 	{
 		quote: "Only two things are infinite, the universe and human stupidity, and I'm not sure about the former.",
 		source: 'Albert Einstein',
+		category: 'Science',
 		year: 1920
 	}
 ];
@@ -100,10 +105,15 @@ function printQuote() {
 	if (quote.hasOwnProperty('year')) {
 		print += '<span class="year">' + quote.year + '</span>';
 	}
+	if (quote.hasOwnProperty('category')) {
+		print += '<p class="category">' + 'Category :- ' + quote.category + '</P>';
+	}
 	print += '</p>';
 	outputDiv.innerHTML = print;
 	//changes the back ground color with a RGB value---https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp
 	document.body.style.backgroundColor = color();
+	//changes the button back ground color with a RGB value
+	document.getElementById('loadQuote').style.backgroundColor = color();
 }
 setInterval(printQuote, 15000); //---https://sarfraznawaz.wordpress.com/2012/01/26/javascript-self-invoking-functions/
 
