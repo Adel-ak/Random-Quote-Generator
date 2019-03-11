@@ -62,8 +62,7 @@ let quotes = [
 		year: 1920
 	}
 ];
-//an arry with quotes objects that was already printed
-let printedQuote = [];
+
 //holds a RGB value
 let color = function randomColor() {
 	var red = Math.floor(Math.random() * 255);
@@ -74,6 +73,8 @@ let color = function randomColor() {
 
 //function generating a random number
 function getRandomQuote(gen) {
+	//an arry with quotes objects that was already printed
+	let printedQuote = [];
 	var num = Math.floor(Math.random() * gen.length);
 	//holds one object properties from quotes array that was picked by index of (num)
 	var quote = gen[num];
